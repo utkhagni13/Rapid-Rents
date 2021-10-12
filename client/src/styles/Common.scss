@@ -1,0 +1,35 @@
+/****** Default font ******/
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700&display=swap");
+
+/****** Default CSS ******/
+:root {
+  --navbarHeight: 4rem;
+  --bodyFont: "Source Sans Pro", sans-serif;
+  --smallGap: 1rem;
+  --smallestGap: 0.5rem;
+
+  --bigFontSize: 2.5rem;
+  --smallFontSize: 1.2rem;
+  --fontSize: 1.5rem;
+
+  --textColor: rgb(0, 0, 0);
+  --bodyColor: rgb(255, 255, 255);
+  --themeColor: rgb(208, 210, 255);
+  --buttonColor: rgb(0, 0, 245);
+}
+
+@media screen and (max-width: 768px) {
+  :root {
+    --navbarHeight: 4rem;
+    --bigFontSize: 1.5rem;
+    --fontSize: 0.5rem;
+  }
+}
+
+body {
+  font-family: var(--bodyFont);
+  font-size: var(--fontSize);
+  color: var(--textColor);
+  background-color: var(--bodyColor);
+  margin: var(--navbarHeight) 0 0 0;
+}
