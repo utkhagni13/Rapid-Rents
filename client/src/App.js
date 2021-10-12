@@ -6,10 +6,12 @@ import Navbar from "./components/navbar/Navbar";
 import HomePage from "./components/Pages/homepage/HomePage";
 import Login from "./components/Pages/auth/login/Login";
 import SignUp from "./components/Pages/auth/signup/Signup";
+import Footer from "./components/footer/Footer";
 
 /******** Styles ********/
 import "./styles/Common.scss";
 import "./styles/Navbar.scss";
+import "./styles/Footer.scss";
 
 const App = () => {
   return (
@@ -25,6 +27,7 @@ const App = () => {
             <Route exact path="/register" component={SignUp} />
           </Switch>
         </main>
+        <Footer />
       </Router>
     </>
   );
