@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { RiHome4Line } from "react-icons/ri";
 import { slide as Menu } from "react-burger-menu";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { GoSignIn } from "react-icons/go";
+import { HiOutlineLogin } from "react-icons/hi";
+import { VscChecklist } from "react-icons/vsc";
 import { useHistory } from "react-router-dom";
 
 var styles = {
@@ -17,7 +20,7 @@ var styles = {
     width: "24px",
   },
   bmCross: {
-    background: "var(--bodyColor)",
+    background: "var(--textColor)",
   },
   bmMenuWrap: {
     position: "fixed",
@@ -25,10 +28,11 @@ var styles = {
     top: "0",
   },
   bmMenu: {
-    background: "var(--textColor)",
+    background: "var(--themeColor)",
+    border: "5px solid var(--bodyColor)",
   },
   bmItemList: {
-    color: "var(--bodyColor)",
+    color: "var(--textColor)",
     padding: "var(--smallGap)",
   },
   bmItem: {
@@ -37,18 +41,28 @@ var styles = {
   },
 };
 
-const navList = () => {
-  return [
-    {
-      name: "Log-In",
-      link: "/login",
-    },
-    {
-      name: "Sign-Up",
-      link: "/signup",
-    },
-  ];
-};
+const navlist = [
+  {
+    name: "Home",
+    icon: <RiHome4Line />,
+    path: "/",
+  },
+  {
+    name: "Login",
+    icon: <HiOutlineLogin />,
+    path: "/login",
+  },
+  {
+    name: "Register",
+    icon: <GoSignIn />,
+    path: "/register",
+  },
+  {
+    name: "Bookings",
+    icon: <VscChecklist />,
+    path: "/bookings",
+  },
+];
 
 const Navbar = () => {
   const [navbarState, setNavbarState] = useState({
@@ -62,26 +76,18 @@ const Navbar = () => {
   const DisplayDesktop = () => {
     return (
       <div className="links">
-        {navList().map((item, index) => {
-          return (
-            <p
-              key={index}
-              onClick={() => {
-                history.push(`${item.link}`);
-              }}
-            >
-              {item.name}
-            </p>
-          );
-        })}
-        <div
-          onClick={() => {
-            history.push("/");
-          }}
-          className="hover_field"
-        >
-          <RiHome4Line size="1.5rem" />
-        </div>
+        {navlist.map((item) => (
+          <p
+            onClick={() => {
+              history.push(`${item.path}`);
+            }}
+          >
+            <div className="menu_item">
+              <div style={{ marginTop: "5px" }}>{item.icon}</div>
+              <div>{item.name}</div>
+            </div>
+          </p>
+        ))}
       </div>
     );
   };
@@ -114,28 +120,19 @@ const Navbar = () => {
           right
         >
           <div>
-            <div
-              onClick={() => {
-                history.push("/");
-                handleDrawerClose(false);
-              }}
-              style={{ marginBottom: "var(--smallGap)" }}
-            >
-              <RiHome4Line color="black" size="1.5rem" />
-            </div>
-            {navList().map((item, index) => {
-              return (
-                <p
-                  key={index}
-                  onClick={() => {
-                    handleDrawerClose(false);
-                    history.push(`/${item.link}`);
-                  }}
-                >
-                  {item.name}
-                </p>
-              );
-            })}
+            {navlist.map((item) => (
+              <p
+                onClick={() => {
+                  handleDrawerClose(false);
+                  history.push(`${item.path}`);
+                }}
+              >
+                <div className="menu_item">
+                  <div style={{ marginTop: "5px" }}>{item.icon}</div>
+                  <div>{item.name}</div>
+                </div>
+              </p>
+            ))}
           </div>
         </Menu>
       </div>

@@ -57,7 +57,7 @@
 .links {
   display: flex;
   justify-content: center;
-  gap: var(--smallGap);
+  gap: 3rem;
   p {
     color: var(--textColor);
     text-decoration: none;
@@ -69,6 +69,16 @@
       cursor: pointer;
       border-bottom: 2px solid var(--buttonColor);
     }
+  }
+}
+
+.menu_item {
+  display: flex;
+  gap: 3px;
+  div {
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
   }
 }
 
