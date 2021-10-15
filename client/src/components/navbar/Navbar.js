@@ -76,18 +76,21 @@ const Navbar = () => {
   const DisplayDesktop = () => {
     return (
       <div className="links">
-        {navlist.map((item) => (
-          <p
-            onClick={() => {
-              history.push(`${item.path}`);
-            }}
-          >
-            <div className="menu_item">
-              <div style={{ marginTop: "5px" }}>{item.icon}</div>
-              <div>{item.name}</div>
-            </div>
-          </p>
-        ))}
+        {navlist.map((item, index) => {
+          return (
+            <p
+              key={index}
+              onClick={() => {
+                history.push(`${item.path}`);
+              }}
+            >
+              <div className="menu_item">
+                <div style={{ marginTop: "5px" }}>{item.icon}</div>
+                <div>{item.name}</div>
+              </div>
+            </p>
+          );
+        })}
       </div>
     );
   };
@@ -120,19 +123,22 @@ const Navbar = () => {
           right
         >
           <div>
-            {navlist.map((item) => (
-              <p
-                onClick={() => {
-                  handleDrawerClose(false);
-                  history.push(`${item.path}`);
-                }}
-              >
-                <div className="menu_item">
-                  <div style={{ marginTop: "5px" }}>{item.icon}</div>
-                  <div>{item.name}</div>
-                </div>
-              </p>
-            ))}
+            {navlist.map((item, index) => {
+              return (
+                <p
+                  key={index}
+                  onClick={() => {
+                    handleDrawerClose(false);
+                    history.push(`${item.path}`);
+                  }}
+                >
+                  <div className="menu_item">
+                    <div style={{ marginTop: "5px" }}>{item.icon}</div>
+                    <div>{item.name}</div>
+                  </div>
+                </p>
+              );
+            })}
           </div>
         </Menu>
       </div>
@@ -156,7 +162,7 @@ const Navbar = () => {
     <div className="navbar">
       <div className="common_btn">
         <a href="/" rel="noreferrer">
-          <button>LOGO Here</button>
+          <button>Rapid-Rents</button>
         </a>
       </div>
       {mobileView ? DisplayMobile() : DisplayDesktop()}
