@@ -147,7 +147,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const setResponsiveness = () => {
-      return window.innerWidth < 952
+      return window.innerWidth < 768
         ? setNavbarState((prevState) => ({ ...prevState, mobileView: true }))
         : setNavbarState((prevState) => ({ ...prevState, mobileView: false }));
     };
