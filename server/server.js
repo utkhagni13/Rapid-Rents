@@ -7,7 +7,7 @@ const cors = require("cors");
 // const path = require("path");
 
 //Files
-const routes = require("./routes/routes");
+const routes = require("./routes/Routes");
 const dbURL = require("./config/Keys").mongoDbURL;
 
 //PORT
@@ -24,8 +24,8 @@ mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true }, (er
   else console.log("Successfully connected to mongoDB");
 });
 
-//Routes
-// app.use("/", routes);
+// Routes
+app.use("/", routes);
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
