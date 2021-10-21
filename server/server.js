@@ -20,13 +20,13 @@ app.use(cors());
 
 //Database
 mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
-  if (err) console.log(err);
-  else console.log("Successfully connected to mongoDB");
+    if (err) console.log(err);
+    else console.log("Successfully connected to mongoDB");
 });
 
 // Routes
 app.use("/", routes);
 
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+    console.log(`Server running on port ${port}`);
 });
