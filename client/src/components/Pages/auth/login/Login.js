@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import "../../../../styles/Login.scss";
 import TextField from "@mui/material/TextField";
@@ -15,6 +15,10 @@ const Login = () => {
         password: "",
         showPassword: false,
     });
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     const handleChange = (e) => {
         setLoginData({
@@ -39,7 +43,7 @@ const Login = () => {
             <div className="sideimg"></div>
             <div className="loginPage">
                 <div className="signing-box">
-                    <p className="stylefont">Login to Rapid-Rents</p>
+                    <p className="stylefont">Login to RapidRents</p>
                     <form>
                         <div className="form-group">
                             <p>Enter you email</p>
