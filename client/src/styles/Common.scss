@@ -12,22 +12,17 @@
     --smallestGap: 0.5rem;
 
     --bigFontSize: 2.5rem;
-    --smallFontSize: 1.2rem;
     --fontSize: 1.5rem;
+    --smallFontSize: 1.2rem;
+    --smallestFontSize: 0.9rem;
 
     --textColor: rgb(0, 0, 0);
+    --textColorLight: rgb(64, 64, 64);
     --bodyColor: rgb(255, 255, 255);
     --themeColor: rgb(208, 210, 255);
     --buttonColor: rgb(0, 0, 245);
-    --buttonColor2: rgb(209, 195, 0);
-}
-
-@media screen and (max-width: 768px) {
-    :root {
-        --navbarHeight: 4rem;
-        --bigFontSize: 1.5rem;
-        --fontSize: 0.5rem;
-    }
+    --buttonColor2: rgb(255, 250, 173);
+    --buttonColor3: rgb(255, 44, 44);
 }
 
 body {

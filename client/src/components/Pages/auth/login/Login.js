@@ -1,27 +1,106 @@
-import React from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router";
 import "../../../../styles/Login.scss";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
+    const history = useHistory();
+    const [loginData, setLoginData] = useState({
+        email: "",
+        password: "",
+        showPassword: false,
+    });
+
+    const handleChange = (e) => {
+        setLoginData({
+            ...loginData,
+            password: e.target.value,
+        });
+    };
+
+    const handleClickShowPassword = () => {
+        setLoginData({
+            ...loginData,
+            showPassword: !loginData.showPassword,
+        });
+    };
+
+    const handleMouseDownPassword = (e) => {
+        e.preventDefault();
+    };
+
     return (
         <div className="bgpage">
             <div className="sideimg"></div>
             <div className="loginPage">
-                <p className="stylefont">Get yourself the most comfortable home</p>
                 <div className="signing-box">
-                    <h2>Login</h2>
+                    <p className="stylefont">Login to Rapid-Rents</p>
                     <form>
                         <div className="form-group">
-                            <p>Email</p>
+                            <p>Enter you email</p>
                             <TextField className="mu-input" label="Email" variant="outlined" required />
                         </div>
                         <div className="form-group">
-                            <p>Password</p>
-                            <TextField className="mu-input" label="Password" type="password" required />
+                            <p>Enter the password</p>
+                            <TextField
+                                className="mu-input"
+                                label="Password"
+                                type={loginData.showPassword ? "text" : "password"}
+                                value={loginData.password}
+                                onChange={handleChange}
+                                required
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="start">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                onMouseDown={handleMouseDownPassword}
+                                                edge="end"
+                                            >
+                                                {loginData.showPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    ),
+                                }}
+                            />
                         </div>
-                        <button type="submit" className="btn btn-primary">
+                        <div className="small-links">
+                            <div style={{ textDecoration: "underline", cursor: "pointer" }}>Forgot password</div>
+                            <div>
+                                Don't have an account?
+                                <span
+                                    onClick={() => {
+                                        history.push("/register");
+                                    }}
+                                    style={{
+                                        cursor: "pointer",
+                                        color: "var(--buttonColor)",
+                                        textDecoration: "underline",
+                                    }}
+                                >
+                                    {" "}
+                                    Sign Up
+                                </span>
+                            </div>
+                        </div>
+                        <button type="submit" className="submit-form yellow">
                             SUBMIT
+                        </button>
+                        <br />
+                        <br />
+                        <hr />
+                        <br />
+                        <button className="submit-form red">
+                            <div style={{ display: "flex", justifyContent: "center", gap: "10px" }}>
+                                <FcGoogle />
+                                Login with Google
+                            </div>
                         </button>
                     </form>
                 </div>
