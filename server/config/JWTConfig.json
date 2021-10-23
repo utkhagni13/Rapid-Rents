@@ -1,0 +1,4 @@
+{
+    "expiresIn": "2h",
+    "algorithm": "HS256"
+}
