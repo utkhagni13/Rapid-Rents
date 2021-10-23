@@ -26,22 +26,23 @@
 .signing-box {
     display: flex;
     flex-direction: column;
+    margin: 3rem auto;
     margin-left: auto;
     margin-right: auto;
     background-color: var(--bodyColor);
     border-radius: 10px;
     width: 70%;
     padding: 0 var(--largeGap) var(--largeGap) var(--largeGap);
+    border: 3px solid var(--themeColor);
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 
     h2 {
-        margin-bottom: var(--smallestGap);
+        margin: 0 auto;
     }
 
     .form-group {
         text-align: left;
         width: 100%;
-        margin-bottom: 2rem;
         p {
             font-size: var(--smallFontSize);
             margin-bottom: var(--smallestGap);
@@ -51,19 +52,45 @@
         }
     }
 
-    button {
+    .small-links {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: var(--smallestGap);
+        font-size: var(--smallestFontSize);
+        color: var(--textColorLight);
+        margin-bottom: 2rem;
+    }
+
+    .submit-form {
         width: 100%;
         cursor: pointer;
         border: none;
-        border-radius: 10px;
+        border-radius: 30px;
         padding: 10px;
         font-size: var(--smallFontSize);
-        background-color: var(--buttonColor);
-        color: var(--bodyColor);
-    }
-    button:hover {
-        border: 1px solid var(--buttonColor2);
-        background-color: rgb(236, 236, 0);
         color: var(--textColor);
+        transition: all 0.3s ease-in-out;
+        font-weight: bold;
+    }
+    .yellow {
+        background-color: var(--buttonColor2);
+        color: var(--bodyColor);
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    }
+    .red {
+        border: 2px solid var(--buttonColor3);
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    }
+}
+
+/************************* Mobile View Starts Here *************************/
+@media screen and (max-width: 768px) {
+    .sideimg {
+        display: none;
+    }
+
+    .signing-box {
+        width: 70%;
     }
 }
