@@ -100,13 +100,13 @@ const Login = () => {
                         <br />
                         <hr />
                         <br />
-                        <button className="submit-form red">
-                            <div style={{ display: "flex", justifyContent: "center", gap: "10px" }}>
-                                <FcGoogle />
-                                Login with Google
-                            </div>
-                        </button>
                     </form>
+                    <button className="submit-form red">
+                        <div style={{ display: "flex", justifyContent: "center", gap: "10px" }}>
+                            <FcGoogle />
+                            Login with Google
+                        </div>
+                    </button>
                 </div>
             </div>
         </div>
