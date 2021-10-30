@@ -17,26 +17,26 @@ import "./styles/Navbar.scss";
 import "./styles/Footer.scss";
 
 const App = () => {
-  return (
-    <>
-      <Router>
-        <header>
-          <Navbar />
-        </header>
-        <main>
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/add-city" component={AddCity} />
-            <Route exact path="/add-site" component={AddSite} />
-            <Route exact path="/bookings" component={AllBookings} />
-            <Route exact path="/sites" component={AllSites} />
-            <Route exact path="/users" component={AllUsers} />
-          </Switch>
-        </main>
-        <Footer />
-      </Router>
-    </>
-  );
+    return (
+        <>
+            <Router>
+                <header>
+                    <Navbar />
+                </header>
+                <main>
+                    <Switch>
+                        <Route exact path="/" component={HomePage} />
+                        <Route exact path="/add-city" component={AddCity} />
+                        <Route exact path="/add-site" component={AddSite} />
+                        <Route exact path="/bookings" component={AllBookings} />
+                        <Route exact path="/sites" component={AllSites} />
+                        <Route exact path="/users" component={AllUsers} />
+                    </Switch>
+                </main>
+                <Footer />
+            </Router>
+        </>
+    );
 };
 
 export default App;

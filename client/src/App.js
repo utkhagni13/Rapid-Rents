@@ -14,23 +14,23 @@ import "./styles/Navbar.scss";
 import "./styles/Footer.scss";
 
 const App = () => {
-  return (
-    <>
-      <Router>
-        <header>
-          <Navbar />
-        </header>
-        <main>
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={SignUp} />
-          </Switch>
-        </main>
-        <Footer />
-      </Router>
-    </>
-  );
+    return (
+        <>
+            <Router>
+                <header>
+                    <Navbar />
+                </header>
+                <main>
+                    <Switch>
+                        <Route exact path="/" component={HomePage} />
+                        <Route exact path="/login" component={Login} />
+                        <Route exact path="/register" component={SignUp} />
+                    </Switch>
+                </main>
+                <Footer />
+            </Router>
+        </>
+    );
 };
 
 export default App;
