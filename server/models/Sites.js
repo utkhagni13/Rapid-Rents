@@ -68,15 +68,6 @@ const sitesSchema = new mongoose.Schema(
             type: [String],
             required: true,
         },
-        ratings: {
-            type: Number,
-            required: true,
-        },
-        reviews: {
-            type: Number,
-            required: true,
-        },
-                
     },
     {
         timestamps: { createdAt: "createdAt", updatedAt: "updatedAt" },
