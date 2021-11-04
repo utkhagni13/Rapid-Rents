@@ -1,22 +1,26 @@
 import React from "react";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
-import { states } from "../../data/Data";
 
-const AutoComplete = ({ setState, state }) => {
+const AutoComplete = ({ list, setState, state, query }) => {
     const handleOnSelect = (item) => {
-        console.log(item);
-        setState(item.name);
+        if (query === "name") setState(item.name);
+        else setState(item.cityName);
+    };
+
+    const handleOnClear = () => {
+        setState("");
     };
 
     return (
         <div>
             <ReactSearchAutocomplete
-                items={states}
-                fuseOptions={{ keys: ["name"] }} // Search on both fields
-                resultStringKeyName="name" // String to display in the results
+                items={list}
+                fuseOptions={{ keys: [query] }}
+                resultStringKeyName={query}
                 onSelect={handleOnSelect}
                 showIcon={false}
-                placeholder={state.length ? state : "Type the name of a state"}
+                onClear={handleOnClear}
+                placeholder={state.length ? state : "Type something..."}
                 styling={{
                     height: "56px",
                     border: "1px solid gray",
