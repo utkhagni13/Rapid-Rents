@@ -1,5 +1,5 @@
 .form-container {
-    width: 60%;
+    width: 70%;
     margin-top: 6rem;
     background-color: var(--bodyColor);
     border: 2px solid var(--borderColor);
@@ -15,7 +15,6 @@
 .add-form {
     padding: 0 var(--smallGap) var(--largeGap) var(--smallGap);
     flex: 2;
-    border-right: 1px solid var(--borderColor);
     button {
         background-color: var(--buttonColor2);
         color: var(--bodyColor);
@@ -53,6 +52,24 @@
     .mu-input {
         width: 100%;
     }
+}
+
+.big-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: var(--smallGap);
+    margin-bottom: var(--smallGap);
+}
+
+.oneline-text {
+    display: flex;
+    justify-content: space-between;
+}
+
+.showlist {
+    display: flex;
+    font-size: var(--smallestFontSize);
+    color: var(--textColorLight);
 }
 
 @media screen and (max-width: 768px) {

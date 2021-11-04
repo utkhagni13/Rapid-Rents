@@ -1,9 +1,11 @@
 import { combineReducers } from "redux";
 
 // Import reducers
+import { AllCities } from "./Cities";
 
+// Add reducers here
 const rootReducer = combineReducers({
-  // Add reducers here
+    AllCities,
 });
 
 export default rootReducer;

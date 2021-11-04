@@ -1,15 +1,19 @@
 import React, { useState } from "react";
-import "../../../styles/AddForm.scss";
 import Swal from "sweetalert2";
 import TextField from "@mui/material/TextField";
-import AutoComplete from "../../common/AutoComplete";
+import StateAutoComplete from "../../common/auto-complete/StateAutoComplete";
+
+import "../../../styles/AddForm.scss";
+import { states } from "../../../data/Data";
+import { addNewCity } from "../../../requests/Cities";
 
 const AddCity = () => {
-    const [state, setState] = useState("");
-    const [city, setCity] = useState("");
+    const [stateName, setStateName] = useState("");
+    const [cityName, setCityName] = useState("");
 
     const handleSubmit = (e) => {
-        if (!state.length) {
+        e.preventDefault();
+        if (!stateName.length) {
             Swal.fire({
                 title: "<strong>State is not selected</strong>",
                 icon: "info",
@@ -18,15 +22,30 @@ const AddCity = () => {
             });
             return;
         }
-        Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "<strong>New City Added</strong>",
-            showConfirmButton: false,
-            timer: 2000,
-        });
-        console.log(state, city);
-        e.preventDefault();
+        const addCity = async () => {
+            const result = await addNewCity({ stateName, cityName });
+            if (result.response !== null) {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "<strong>New City Added</strong>",
+                    showConfirmButton: false,
+                    timer: 2000,
+                });
+                setTimeout(function () {
+                    window.location.reload(true);
+                }, 2500);
+            } else {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: result.error,
+                    showConfirmButton: false,
+                    timer: 2000,
+                });
+            }
+        };
+        addCity();
     };
 
     return (
@@ -37,7 +56,12 @@ const AddCity = () => {
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
                             <p>Select State*</p>
-                            <AutoComplete setState={setState} state={state} />
+                            <StateAutoComplete
+                                list={states}
+                                setState={setStateName}
+                                state={stateName}
+                                query={"name"}
+                            />
                         </div>
                         <div className="form-group">
                             <p>Enter City Name*</p>
@@ -47,7 +71,7 @@ const AddCity = () => {
                                 variant="outlined"
                                 required
                                 onChange={(e) => {
-                                    setCity(e.target.value);
+                                    setCityName(e.target.value);
                                 }}
                             />
                         </div>
