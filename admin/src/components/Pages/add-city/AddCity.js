@@ -23,8 +23,8 @@ const AddCity = () => {
             return;
         }
         const addCity = async () => {
-            const result = await addNewCity({ stateName, cityName });
-            if (result.response !== null) {
+            const res = await addNewCity({ stateName, cityName });
+            if (res.data !== null) {
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -39,7 +39,7 @@ const AddCity = () => {
                 Swal.fire({
                     position: "top-end",
                     icon: "error",
-                    title: result.error,
+                    title: res.error,
                     showConfirmButton: false,
                     timer: 2000,
                 });

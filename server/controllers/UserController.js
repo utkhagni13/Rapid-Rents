@@ -34,7 +34,7 @@ exports.login = async (req, res) => {
         }
 
         // generate a new token
-        const getToken = jwt.createToken(result._id, result.email, result.role);
+        const getToken = jwt.createToken({_id: result._id, email: result.email, role: result.role});
 
         // store the token in the database
         if (getToken.data) {
