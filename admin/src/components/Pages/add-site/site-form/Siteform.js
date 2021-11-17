@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
+import Swal from "sweetalert2";
+import { addNewSite } from "../../../../requests/Sites";
 
 const siteLables = [
     {
@@ -22,49 +24,49 @@ const siteLables = [
     },
     {
         label: "Rent/month",
-        value: 0,
+        value: "",
         type: "number",
         required: true,
     },
     {
         label: "BHK Number",
-        value: 0,
+        value: "",
         type: "number",
         required: false,
     },
     {
         label: "Number of Rooms",
-        value: 0,
+        value: "",
         type: "number",
         required: true,
     },
     {
         label: "Number of Bathrooms",
-        value: 0,
+        value: "",
         type: "number",
         required: true,
     },
     {
         label: "Number of Kitchen",
-        value: 0,
+        value: "",
         type: "number",
         required: true,
     },
     {
         label: "Net Area(in sq. feet)",
-        value: 0,
+        value: "",
         type: "number",
         required: true,
     },
     {
         label: "Length(in feet)",
-        value: 0,
+        value: "",
         type: "number",
         required: true,
     },
     {
         label: "Width(in feet)",
-        value: 0,
+        value: "",
         type: "number",
         required: true,
     },
@@ -85,7 +87,7 @@ const ownerDataLabels = [
     },
     {
         label: "Phone",
-        value: 0,
+        value: "",
         type: "number",
         required: true,
     },
@@ -124,6 +126,15 @@ const imageLabels = [
     },
 ];
 
+const model = (props) => {
+    Swal.fire({
+        title: `<strong>${props.title}</strong>`,
+        text: props.text,
+        icon: props.icon,
+        position: "top-end",
+    });
+};
+
 const Siteform = ({ cityName, stateName, setShowForm }) => {
     // data states
     const [siteData, setSiteData] = useState(siteLables);
@@ -153,6 +164,78 @@ const Siteform = ({ cityName, stateName, setShowForm }) => {
         console.log(siteBigData);
         console.log(siteOwnerData);
         console.log(siteData);
+
+        // validation checks
+        for (let i = 0; i < siteData.length; i++) {
+            if (siteData[i].value === "") {
+                model({
+                    title: "Details Missing",
+                    text: "Please fill the site details",
+                    icon: "info",
+                });
+                return;
+            }
+        }
+        for (let i = 0; i < siteOwnerData.length; i++) {
+            if (siteOwnerData[i].value === "") {
+                model({
+                    title: "Details Missing",
+                    text: "Please fill the owner's details",
+                    icon: "info",
+                });
+                return;
+            }
+        }
+        if (siteBigData.Description === "") {
+            model({
+                title: "Details Missing",
+                text: "Please add a description for the site",
+                icon: "info",
+            });
+            return;
+        }
+        if (siteBigData.ImagesArray[0].value === "") {
+            model({
+                title: "Details Missing",
+                text: "Please add atleast one link for the image of site",
+                icon: "info",
+            });
+            return;
+        }
+
+        // if all the validation checks are passed
+        const data = {
+            SiteData: siteData,
+            SiteBigData: siteBigData,
+            SiteOwnerData: siteOwnerData,
+            CityName: cityName,
+            StateName: stateName,
+        };
+        const addNewRentalSite = async () => {
+            const result = await addNewSite(data);
+            console.log(result);
+            if (result.response !== null && result.response === "Success") {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "<strong>New City Added</strong>",
+                    showConfirmButton: false,
+                    timer: 2000,
+                });
+                setTimeout(function () {
+                    window.location.reload(true);
+                }, 2500);
+            } else {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: "Internal Server Error occured",
+                    showConfirmButton: false,
+                    timer: 2000,
+                });
+            }
+        };
+        addNewRentalSite();
     };
 
     return (
@@ -189,7 +272,7 @@ const Siteform = ({ cityName, stateName, setShowForm }) => {
                         <div className="form-group">
                             <p>Site Details</p>
                             <div className="big-form">
-                                {siteLables.map((site, index) => {
+                                {siteData.map((site, index) => {
                                     return (
                                         <div key={index} className="form-group">
                                             <p>{site.label}</p>
@@ -264,7 +347,7 @@ const Siteform = ({ cityName, stateName, setShowForm }) => {
                                 className="oneline-text"
                                 style={{ gap: "var(--smallestFontSize)" }}
                             >
-                                {ownerDataLabels.map((owner, index) => {
+                                {siteOwnerData.map((owner, index) => {
                                     return (
                                         <div key={index} className="form-group">
                                             <p>{owner.label}</p>
@@ -293,7 +376,7 @@ const Siteform = ({ cityName, stateName, setShowForm }) => {
                         <div className="form-group">
                             <p>Add Images</p>
                             <div className="big-form">
-                                {imageLabels.map((image, index) => {
+                                {siteBigData.ImagesArray.map((image, index) => {
                                     return (
                                         <div key={index} className="form-group">
                                             <p>{image.label}</p>

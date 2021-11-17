@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import "../../../../styles/Login.scss";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { FcGoogle } from "react-icons/fc";
+
+import "../../../../styles/Login.scss";
+import { validateEmail } from "../../../../validator/Email";
+import { validateMobileNumber } from "../../../../validator/Phone";
+import { login } from "../../../../requests/Authentication";
 
 const Login = () => {
     const history = useHistory();
@@ -15,6 +19,11 @@ const Login = () => {
         password: "",
         showPassword: false,
     });
+    const [validation, setValidation] = useState({
+        email: true,
+        password: true,
+    });
+    const [click, setClick] = useState(false);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -38,16 +47,53 @@ const Login = () => {
         e.preventDefault();
     };
 
+    const handleSubmit = async (e) => {
+        setClick(true);
+        e.preventDefault();
+        console.log(loginData);
+        if (loginData.password.length === 0) {
+            setValidation({ email: validateEmail(loginData.email), password: false });
+            return;
+        }
+        if (!validateEmail(loginData.email)) {
+            setValidation({ email: false, password: true });
+            return;
+        }
+        const res = await login(loginData.email, loginData.password);
+        if (res.data) {
+            console.log(res.data);
+        } else {
+            console.log(res);
+        }
+    };
+
     return (
         <div className="bgpage">
             <div className="sideimg"></div>
             <div className="loginPage">
                 <div className="signing-box">
                     <p className="stylefont">Login to RapidRents</p>
-                    <form>
+                    <form
+                        onSubmit={(e) => {
+                            // setClick(true);
+                            handleSubmit(e);
+                        }}
+                    >
                         <div className="form-group">
                             <p>Enter you email</p>
-                            <TextField className="mu-input" label="Email" variant="outlined" required />
+                            <TextField
+                                className="mu-input"
+                                label="Email"
+                                variant="outlined"
+                                required
+                                error={loginData.email.length === 0 && click}
+                                onChange={(e) =>
+                                    setLoginData({
+                                        ...loginData,
+                                        email: e.target.value,
+                                    })
+                                }
+                            />
                         </div>
                         <div className="form-group">
                             <p>Enter the password</p>
@@ -67,7 +113,11 @@ const Login = () => {
                                                 onMouseDown={handleMouseDownPassword}
                                                 edge="end"
                                             >
-                                                {loginData.showPassword ? <VisibilityOff /> : <Visibility />}
+                                                {loginData.showPassword ? (
+                                                    <VisibilityOff />
+                                                ) : (
+                                                    <Visibility />
+                                                )}
                                             </IconButton>
                                         </InputAdornment>
                                     ),
@@ -75,7 +125,9 @@ const Login = () => {
                             />
                         </div>
                         <div className="small-links">
-                            <div style={{ textDecoration: "underline", cursor: "pointer" }}>Forgot password</div>
+                            <div style={{ textDecoration: "underline", cursor: "pointer" }}>
+                                Forgot password
+                            </div>
                             <div>
                                 Don't have an account?
                                 <span

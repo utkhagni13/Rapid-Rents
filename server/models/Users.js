@@ -36,6 +36,9 @@ const usersSchema = new mongoose.Schema(
         gender: {
             type: String,
         },
+        token: {
+            type: String,
+        },
     },
     {
         timestamps: { createdAt: "createdAt", updatedAt: "updatedAt" },
