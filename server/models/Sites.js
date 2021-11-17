@@ -44,9 +44,9 @@ const sitesSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        cityID: { 
-            type: Schema.Types.ObjectId, 
-            ref: "Cities" 
+        city: { 
+            type: String, 
+            required: true,
         },
         state: {
             type: String,
