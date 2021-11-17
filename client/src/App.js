@@ -35,13 +35,20 @@ const App = () => {
         <>
             <Router>
                 <header>
-                    <Navbar />
+                    <Navbar loggedIn={loggedIn} />
                 </header>
                 <main>
                     <Switch>
-                        <Route exact path="/" component={HomePage} />
-                        <Route exact path="/login" component={Login} />
-                        <Route exact path="/register" component={SignUp} />
+                        <Route exact path="/">
+                            <HomePage />
+                        </Route>
+                        <Route exact path="/login">
+                            <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+                        </Route>
+                        <Route exact path="/register">
+                            <SignUp />
+                        </Route>
+                        {/* <Route exact path="/all-bookings" /> */}
                     </Switch>
                 </main>
                 <Footer />
