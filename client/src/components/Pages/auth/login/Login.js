@@ -79,8 +79,7 @@ const Login = ({ loggedIn, setLoggedIn }) => {
                 }, 2500);
             } else {
                 Swal.fire({
-                    title: `<strong>Connection Problem</strong>`,
-                    text: "Please check your internet and try again",
+                    title: `<strong>${res.error}</strong>`,
                     icon: "error",
                     position: "top-end",
                 });
