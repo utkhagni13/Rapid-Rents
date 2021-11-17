@@ -18,6 +18,19 @@ export const login = async (email, password) => {
     }
 };
 
+export const logout = async () => {
+    const url = "/logout";
+    const body = {};
+    try {
+        const res = await axios.post(url, body);
+        return res.data;
+    } catch (err) {
+        return err.response
+            ? err.response.data
+            : { data: null, error: "Not connected to the server" };
+    }
+};
+
 export const getUserData = async () => {
     const url = "/getuserdata";
     const body = {};

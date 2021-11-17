@@ -15,6 +15,7 @@ router.post("/addnewcity", CitiesController.addCity);
 // User
 router.post("/login", UserController.login);
 router.post("/register", UserController.register);
+router.post("/logout", AuthController.checkAuthorization, UserController.logout);
 router.post("/getuserdata", AuthController.checkAuthorization, UserController.getUserData);
 
 // router.post("/getsessiontoken", UserController.getSessionToken);

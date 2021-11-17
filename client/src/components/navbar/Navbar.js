@@ -83,7 +83,7 @@ const usernavlist = [
     },
 ];
 
-const Navbar = ({ loggedIn }) => {
+const Navbar = ({ loggedIn, setLoggedIn }) => {
     const [navbarState, setNavbarState] = useState({
         mobileView: false,
         drawerOpen: false,
@@ -110,7 +110,7 @@ const Navbar = ({ loggedIn }) => {
                         </p>
                     );
                 })}
-                {loggedIn ? <Logout /> : <></>}
+                {loggedIn ? <Logout setLoggedIn={setLoggedIn} /> : <></>}
             </div>
         );
     };
@@ -159,7 +159,7 @@ const Navbar = ({ loggedIn }) => {
                                 </p>
                             );
                         })}
-                        {loggedIn ? <Logout /> : <></>}
+                        {loggedIn ? <Logout setLoggedIn={setLoggedIn} /> : <></>}
                     </div>
                 </Menu>
             </div>

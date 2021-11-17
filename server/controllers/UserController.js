@@ -34,7 +34,11 @@ exports.login = async (req, res) => {
         }
 
         // generate a new token
-        const getToken = jwt.createToken({_id: result._id, email: result.email, role: result.role});
+        const getToken = jwt.createToken({
+            _id: result._id,
+            email: result.email,
+            role: result.role,
+        });
 
         // store the token in the database
         if (getToken.data) {
@@ -83,6 +87,23 @@ exports.register = async (req, res) => {
                 gender: value.gender,
             },
         ]);
+        return res.status(200).json({ data: "Success", error: null });
+    } catch (error) {
+        return res.status(400).json({ data: null, error: error.message });
+    }
+};
+
+exports.logout = async (req, res) => {
+    try {
+        let result = await userSchema.updateOne(
+            { _id: req.body.userId },
+            { $set: { token: null } }
+        );
+        if (result.nModified < 1) {
+            res.status(400).json({ data: null, error: "Internal Server Problem" });
+            return;
+        }
+        res.clearCookie("login");
         return res.status(200).json({ data: "Success", error: null });
     } catch (error) {
         return res.status(400).json({ data: null, error: error.message });
