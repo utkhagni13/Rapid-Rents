@@ -35,7 +35,7 @@ const App = () => {
         <>
             <Router>
                 <header>
-                    <Navbar loggedIn={loggedIn} />
+                    <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
                 </header>
                 <main>
                     <Switch>
