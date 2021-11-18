@@ -9,6 +9,26 @@
     background-position: center;
 }
 
+.signup-bg {
+    background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),
+        url("https://www.teahub.io/photos/full/186-1862149_wallpaper-rain-glass-drops-blur-window-windows-10.jpg");
+}
+
+.input-inline {
+    display: flex;
+    justify-content: center;
+    gap: var(--smallestGap);
+}
+
+.options {
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: var(--smallestGap);
+    &:hover {
+        border: 2px solid var(--buttonColor);
+    }
+}
+
 .sideimg {
     flex: 1;
 }

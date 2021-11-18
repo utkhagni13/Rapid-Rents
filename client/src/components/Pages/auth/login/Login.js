@@ -8,7 +8,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import InputAdornment from "@mui/material/InputAdornment";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
-import "../../../../styles/Login.scss";
+import "../../../../styles/Auth.scss";
 import { login } from "../../../../requests/Authentication";
 import { validateEmail } from "../../../../validator/Validate";
 

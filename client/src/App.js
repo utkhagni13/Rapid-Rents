@@ -46,7 +46,7 @@ const App = () => {
                             <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
                         </Route>
                         <Route exact path="/register">
-                            <SignUp />
+                            <SignUp loggedIn={loggedIn} />
                         </Route>
                         {/* <Route exact path="/all-bookings" /> */}
                     </Switch>
