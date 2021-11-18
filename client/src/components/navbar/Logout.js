@@ -9,6 +9,7 @@ const Logout = ({ setLoggedIn }) => {
         const res = await logout();
         if (res.data && res.error === null) {
             setLoggedIn(false);
+            window.location.reload(true);
             history.push("/");
         } else {
             Swal.fire({
