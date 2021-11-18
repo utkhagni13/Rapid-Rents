@@ -21,15 +21,15 @@ const AddSite = () => {
         if (!citiesData.length) {
             //fetch all cities from server
             const getallcategories = async () => {
-                const result = await fetchAllCities();
-                if (result.response) {
-                    console.log(result.response);
-                    dispatch(updateCity(result.response));
+                const res = await fetchAllCities();
+                if (res.data) {
+                    console.log(res.data);
+                    dispatch(updateCity(res.data));
                 } else {
                     Swal.fire({
                         icon: "error",
                         title: "Oops...",
-                        text: `${result.error}`,
+                        text: `${res.error}`,
                     });
                 }
             };
