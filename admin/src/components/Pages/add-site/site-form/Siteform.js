@@ -212,9 +212,9 @@ const Siteform = ({ cityName, stateName, setShowForm }) => {
             StateName: stateName,
         };
         const addNewRentalSite = async () => {
-            const result = await addNewSite(data);
-            console.log(result);
-            if (result.response !== null && result.response === "Success") {
+            const res = await addNewSite(data);
+            console.log(res);
+            if (res.error === null && res.data === "Success") {
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -229,9 +229,8 @@ const Siteform = ({ cityName, stateName, setShowForm }) => {
                 Swal.fire({
                     position: "top-end",
                     icon: "error",
-                    title: "Internal Server Error occured",
-                    showConfirmButton: false,
-                    timer: 2000,
+                    title: `${res.error}`,
+                    showConfirmButton: true,
                 });
             }
         };

@@ -19,7 +19,7 @@ module.exports.addNewSite = (data) => {
         measurements: Joi.array().items(Joi.number()).required(),
         description: Joi.string().required(),
         garageFacility: Joi.boolean().required(),
-        imageArray: Joi.array().items(Joi.string()).required(),
+        imageArray: Joi.array().required(),
         ownerData: Joi.object().required(),
         city: Joi.string().required(),
         state: Joi.string().required(),
