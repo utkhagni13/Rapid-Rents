@@ -20,7 +20,7 @@ const AddSite = () => {
         window.scrollTo(0, 0);
         if (!citiesData.length) {
             //fetch all cities from server
-            const getallcategories = async () => {
+            const getallcities = async () => {
                 const res = await fetchAllCities();
                 if (res.data) {
                     console.log(res.data);
@@ -33,7 +33,7 @@ const AddSite = () => {
                     });
                 }
             };
-            getallcategories();
+            getallcities();
         }
     }, [citiesData, dispatch]);
 
