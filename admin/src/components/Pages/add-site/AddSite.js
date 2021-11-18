@@ -22,7 +22,7 @@ const AddSite = () => {
             //fetch all cities from server
             const getallcities = async () => {
                 const res = await fetchAllCities();
-                if (res.data) {
+                if (res.data && res.error === null) {
                     console.log(res.data);
                     dispatch(updateCity(res.data));
                 } else {
