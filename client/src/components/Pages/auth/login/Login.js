@@ -75,6 +75,7 @@ const Login = ({ loggedIn, setLoggedIn }) => {
                 });
                 setTimeout(function () {
                     setLoggedIn(true);
+                    window.location.reload(true);
                     history.push("/");
                 }, 2500);
             } else {
