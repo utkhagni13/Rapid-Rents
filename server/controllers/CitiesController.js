@@ -9,12 +9,12 @@ module.exports.getCities = async (req, res) => {
     try {
         const cities = await CitiesSchema.find();
         if (cities.length > 0) {
-            return res.status(200).json({ response: cities, error: null });
+            return res.status(200).json({ data: cities, error: null });
         } else {
-            return res.status(404).json({ response: null, error: "No cities found" });
+            return res.status(404).json({ data: null, error: "No cities found" });
         }
     } catch (error) {
-        return res.status(500).json({ response: null, error: error.message });
+        return res.status(500).json({ data: null, error: error.message });
     }
 };
 
@@ -22,7 +22,7 @@ module.exports.addCity = async (req, res) => {
     // validate the request
     const { error, value } = CitiesValidators.addCity(req.body);
     if (error) {
-        return res.status(400).json({ response: null, error: error.details[0].message });
+        return res.status(400).json({ data: null, error: error.details[0].message });
     }
     try {
         // check if the city already exist
@@ -31,7 +31,7 @@ module.exports.addCity = async (req, res) => {
             state: value.state,
         });
         if (city !== null) {
-            return res.status(400).json({ response: null, error: "City already exists" });
+            return res.status(400).json({ data: null, error: "City already exists" });
         }
         // add the city
         await CitiesSchema.insertMany([
@@ -42,8 +42,8 @@ module.exports.addCity = async (req, res) => {
                 status: true,
             },
         ]);
-        return res.status(200).json({ response: "Success", error: null });
+        return res.status(200).json({ data: "Success", error: null });
     } catch (error) {
-        return res.status(500).json({ response: null, error: error.message });
+        return res.status(500).json({ data: null, error: error.message });
     }
 };

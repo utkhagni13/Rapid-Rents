@@ -1,4 +1,70 @@
 .my_container {
-  min-height: 100vh;
-  margin: var(--navbarHeight) 0 0 0;
+    min-height: 100vh;
+    margin: var(--navbarHeight) 0 0 0;
+    background-image: url("https://images.unsplash.com/photo-1510851896000-498520af2236?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8bmlnaHQlMjB3aW5kb3d8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: var(--bodyColor);
+}
+
+.welcome-font {
+    font-size: 2.5rem;
+    font-family: "Dancing Script", cursive;
+    padding: var(--normalGap);
+    p {
+        font-weight: 100;
+        margin: var(--smallestGap);
+    }
+    .site-name {
+        font-size: 4rem;
+    }
+}
+
+.city-select {
+    // border: 2px solid black;
+    width: 50%;
+    display: flex;
+    gap: var(--smallGap);
+}
+
+.showlist {
+    display: flex;
+    color: var(--themeColor);
+}
+
+.form-group {
+    text-align: left;
+    width: 100%;
+    p {
+        font-size: var(--smallFontSize);
+        margin-bottom: var(--smallestGap);
+    }
+    .mu-input {
+        width: 100%;
+    }
+}
+
+.search-sites {
+    margin-top: var(--smallGap);
+    font-size: 1rem;
+    padding: var(--smallGap) var(--largeGap);
+    border: none;
+    cursor: pointer;
+    color: var(--bodyColor);
+    background-color: var(--buttonColor2);
+    border-radius: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .city-select {
+        width: 100%;
+    }
+
+    .welcome-font {
+        font-size: 1.8rem;
+        .site-name {
+            font-size: 3rem;
+        }
+    }
 }
