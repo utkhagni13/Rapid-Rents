@@ -12,6 +12,9 @@ const SiteController = require("../controllers/SiteController");
 router.post("/fetchallcities", CitiesController.getCities);
 router.post("/addnewcity", CitiesController.addCity);
 
+// Sites
+router.post("/addnewrentalsite", SiteController.addRentalSite);
+
 // User
 router.post("/login", UserController.login);
 router.post("/register", UserController.register);

@@ -32,6 +32,7 @@ export const addNewSite = async (data) => {
     console.log(body);
     try {
         const res = await axios.post(url, body);
+        console.log(res.data);
         return res.data;
     } catch (err) {
         console.log(err.response);
