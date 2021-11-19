@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { slide as Menu } from "react-burger-menu";
 import { useHistory } from "react-router-dom";
+import Logout from "./Logout";
 // icons
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiAdminLine } from "react-icons/ri";
@@ -44,7 +45,7 @@ var styles = {
     },
 };
 
-const navlist = [
+const adminnavlist = [
     {
         name: "Dashboard",
         icon: <RiAdminLine />,
@@ -77,7 +78,15 @@ const navlist = [
     },
 ];
 
-const Navbar = () => {
+const generalNavlist = [
+    {
+        name: "Home",
+        icon: <RiAdminLine />,
+        path: "/",
+    },
+];
+
+const Navbar = ({ loggedIn, setLoggedIn }) => {
     const [navbarState, setNavbarState] = useState({
         mobileView: false,
         drawerOpen: false,
@@ -89,7 +98,7 @@ const Navbar = () => {
     const DisplayDesktop = () => {
         return (
             <div className="links">
-                {navlist.map((item, index) => {
+                {(loggedIn ? adminnavlist : generalNavlist).map((item, index) => {
                     return (
                         <p
                             key={index}
@@ -104,6 +113,7 @@ const Navbar = () => {
                         </p>
                     );
                 })}
+                {loggedIn ? <Logout setLoggedIn={setLoggedIn} /> : <></>}
             </div>
         );
     };
@@ -136,7 +146,7 @@ const Navbar = () => {
                     right
                 >
                     <div>
-                        {navlist.map((item, index) => {
+                        {(loggedIn ? adminnavlist : generalNavlist).map((item, index) => {
                             return (
                                 <p
                                     key={index}
@@ -152,6 +162,7 @@ const Navbar = () => {
                                 </p>
                             );
                         })}
+                        {loggedIn ? <Logout setLoggedIn={setLoggedIn} /> : <></>}
                     </div>
                 </Menu>
             </div>
