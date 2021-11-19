@@ -1,0 +1,116 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap");
+
+.bgpage {
+    display: flex;
+    flex-direction: row-reverse;
+    min-height: 100vh;
+    background-image: url("https://st3.depositphotos.com/16122460/i/600/depositphotos_326329472-stock-photo-blurred-view-through-window-on.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.signup-bg {
+    background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),
+        url("https://www.teahub.io/photos/full/186-1862149_wallpaper-rain-glass-drops-blur-window-windows-10.jpg");
+}
+
+.input-inline {
+    display: flex;
+    justify-content: center;
+    gap: var(--smallestGap);
+}
+
+.options {
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: var(--smallestGap);
+    &:hover {
+        border: 2px solid var(--buttonColor);
+    }
+}
+
+.sideimg {
+    flex: 1;
+}
+
+.loginPage {
+    flex: 1;
+    text-align: center;
+    .stylefont {
+        font-size: 2.5rem;
+        font-family: "Dancing Script", cursive;
+    }
+}
+
+.signing-box {
+    display: flex;
+    flex-direction: column;
+    margin: 3rem auto;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: var(--bodyColor);
+    border-radius: 10px;
+    width: 70%;
+    padding: 0 var(--largeGap) var(--largeGap) var(--largeGap);
+    border: 3px solid var(--themeColor);
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+
+    h2 {
+        margin: 0 auto;
+    }
+
+    .form-group {
+        text-align: left;
+        width: 100%;
+        p {
+            font-size: var(--smallFontSize);
+            margin-bottom: var(--smallestGap);
+        }
+        .mu-input {
+            width: 100%;
+        }
+    }
+
+    .small-links {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: var(--smallestGap);
+        font-size: var(--smallestFontSize);
+        color: var(--textColorLight);
+        margin-bottom: 2rem;
+    }
+
+    .submit-form {
+        width: 100%;
+        cursor: pointer;
+        border: none;
+        border-radius: 30px;
+        padding: 10px;
+        font-size: var(--smallFontSize);
+        color: var(--textColor);
+        transition: all 0.3s ease-in-out;
+        font-weight: bold;
+    }
+    .yellow {
+        background-color: var(--buttonColor2);
+        color: var(--bodyColor);
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    }
+    .red {
+        border: 2px solid var(--buttonColor3);
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    }
+}
+
+/************************* Mobile View Starts Here *************************/
+@media screen and (max-width: 768px) {
+    .sideimg {
+        display: none;
+    }
+
+    .signing-box {
+        width: 70%;
+    }
+}
