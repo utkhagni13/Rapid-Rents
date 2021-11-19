@@ -30,6 +30,13 @@ exports.checkAuthorization = (req, res, next) => {
             return res.status(400).json({ data: null, error: "Not authorized" });
         }
 
+        // check admin-routes
+        if (req.url === "/admin/addnewcity" || req.url === "/admin/addnewrentalsite") {
+            if (decodedToken.data.payload.role !== "admin") {
+                return res.status(400).json({ data: null, error: "Not authorized" });
+            }
+        }
+
         // set userid
         req.body.userId = decodedToken.data.payload.userid;
         next();
