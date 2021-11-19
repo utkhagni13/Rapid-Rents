@@ -4,7 +4,7 @@ import { ReactSearchAutocomplete } from "react-search-autocomplete";
 const AutoComplete = ({ list, setState, state, query }) => {
     const handleOnSelect = (item) => {
         if (query === "name") setState(item.name);
-        else setState(item.cityName);
+        else setState({ cityName: item.cityName, _id: item._id });
     };
 
     const handleOnClear = () => {
