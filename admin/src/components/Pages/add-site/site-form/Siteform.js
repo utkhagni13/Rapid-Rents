@@ -218,7 +218,7 @@ const Siteform = ({ cityName, stateName, setShowForm }) => {
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
-                    title: "<strong>New City Added</strong>",
+                    title: "<strong>New Rental Site Added</strong>",
                     showConfirmButton: false,
                     timer: 2000,
                 });
