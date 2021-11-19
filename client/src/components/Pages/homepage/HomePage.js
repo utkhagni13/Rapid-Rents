@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Swal from "sweetalert2";
 
 import CitySelect from "./CitySelect";
 import "../../../styles/HomePage.scss";
@@ -10,7 +9,7 @@ import { updateCity } from "../../../storage/actions/Cities";
 const HomePage = () => {
     const citiesData = useSelector((state) => state.AllCities);
     const dispatch = useDispatch();
-    const [city, setCity] = useState("");
+    const [city, setCity] = useState({});
     const [stateName, setStateName] = useState("");
 
     useEffect(() => {
