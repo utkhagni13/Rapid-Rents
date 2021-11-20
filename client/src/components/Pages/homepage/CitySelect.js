@@ -19,7 +19,7 @@ const CitySelect = ({ citiesData, stateName, setStateName, city, setCity }) => {
             });
             return;
         }
-        history.push(`/search/${stateName}/${city._id}`);
+        history.push(`/search/${stateName}/${city}`);
     };
 
     return (

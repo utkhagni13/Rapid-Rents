@@ -13,6 +13,7 @@ router.post("/fetchallcities", CitiesController.getCities);
 router.post("/admin/addnewcity", CitiesController.addCity);
 
 // Sites
+router.post("/fetchallsites", SiteController.getRentalSites);
 router.post("/admin/addnewrentalsite", SiteController.addRentalSite);
 
 // User

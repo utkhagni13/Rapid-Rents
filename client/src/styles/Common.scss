@@ -20,6 +20,7 @@
     --textColorLight: rgb(64, 64, 64);
     --bodyColor: rgb(255, 255, 255);
     --themeColor: rgb(208, 210, 255);
+    --backgroundColor: rgb(241, 241, 241);
     --buttonColor: rgb(0, 0, 245);
     --buttonColor2: rgb(83, 0, 128);
     --buttonColor3: rgb(255, 44, 44);
@@ -29,12 +30,12 @@ body {
     font-family: var(--bodyFont);
     font-size: var(--fontSize);
     color: var(--textColor);
-    background-color: var(--bodyColor);
+    background-color: var(--backgroundColor);
     margin: var(--navbarHeight) 0 0 0;
 }
 
 main {
-    min-height: 85vh;
+    min-height: 92vh;
 }
 
 .in_middle {
