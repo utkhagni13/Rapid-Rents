@@ -45,7 +45,7 @@ const SiteResults = ({ loggedIn }) => {
                     Showing results for {cityName} ({stateName})
                 </h3>
                 <div className="results-list">
-                    {sitesData.map((site) => (
+                    {siteResults.map((site) => (
                         <div className="results-item" key={site._id}>
                             <div className="results-item-info">
                                 <div>
