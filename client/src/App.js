@@ -5,10 +5,11 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 /******** Components ********/
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
-import SiteResults from "./components/Pages/results/SiteResults";
 import Login from "./components/Pages/auth/login/Login";
 import SignUp from "./components/Pages/auth/signup/Signup";
 import HomePage from "./components/Pages/homepage/HomePage";
+import SiteDetails from "./components/Pages/details/SiteDetails";
+import SiteResults from "./components/Pages/results/SiteResults";
 
 /******** Files ********/
 import { fetchAllSites } from "./requests/Sites";
@@ -82,7 +83,10 @@ const App = () => {
                             <SignUp loggedIn={loggedIn} />
                         </Route>
                         <Route exact path="/search/:stateName/:cityName">
-                            <SiteResults />
+                            <SiteResults loggedIn={loggedIn} />
+                        </Route>
+                        <Route exact path="/site-details/:siteid">
+                            <SiteDetails loggedIn={loggedIn} />
                         </Route>
                     </Switch>
                 </main>
