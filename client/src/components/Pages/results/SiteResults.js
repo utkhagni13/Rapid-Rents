@@ -1,14 +1,33 @@
 import React from "react";
-import { useParams } from "react-router";
+import { useParams, useHistory } from "react-router";
 import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
 import "../../../styles/Results.scss";
 import { AiOutlineSearch } from "react-icons/ai";
 
-const SiteResults = () => {
+const SiteResults = ({ loggedIn }) => {
     const sitesData = useSelector((state) => state.AllSites);
     const { stateName, cityName } = useParams();
+    const history = useHistory();
     const siteResults = sitesData.filter((site) => site.city === cityName);
     console.log(siteResults);
+
+    const checkSiteDetails = (id) => {
+        if (loggedIn) {
+            history.push(`/site-details/${id}`);
+        } else {
+            Swal.fire({
+                position: "top-end",
+                icon: "info",
+                title: "<strong>Please Login to continue</strong>",
+                showConfirmButton: false,
+                timer: 2000,
+            });
+            setTimeout(function () {
+                history.push("/login");
+            }, 2500);
+        }
+    };
 
     return (
         <div className="results-container">
@@ -23,7 +42,7 @@ const SiteResults = () => {
             </div>
             <div className="results-section">
                 <h3>
-                    Showing results for {cityName}({stateName})
+                    Showing results for {cityName} ({stateName})
                 </h3>
                 <div className="results-list">
                     {sitesData.map((site) => (
@@ -50,7 +69,9 @@ const SiteResults = () => {
                                 </div>
                             </div>
                             <div className="check-result-btn">
-                                <button>Check it Now</button>
+                                <button onClick={() => checkSiteDetails(site._id)}>
+                                    Check it Now
+                                </button>
                             </div>
                         </div>
                     ))}
