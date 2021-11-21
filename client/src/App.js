@@ -86,7 +86,7 @@ const App = () => {
                             <SiteResults loggedIn={loggedIn} />
                         </Route>
                         <Route exact path="/site-details/:siteid">
-                            <SiteDetails loggedIn={loggedIn} />
+                            <SiteDetails />
                         </Route>
                     </Switch>
                 </main>
