@@ -1,33 +1,15 @@
 import React from "react";
 import { useParams, useHistory } from "react-router";
 import { useSelector } from "react-redux";
-import Swal from "sweetalert2";
 import "../../../styles/Results.scss";
 import { AiOutlineSearch } from "react-icons/ai";
 
-const SiteResults = ({ loggedIn }) => {
+const SiteResults = () => {
     const sitesData = useSelector((state) => state.AllSites);
     const { stateName, cityName } = useParams();
     const history = useHistory();
     const siteResults = sitesData.filter((site) => site.city === cityName);
     console.log(siteResults);
-
-    const checkSiteDetails = (id) => {
-        if (loggedIn) {
-            history.push(`/site-details/${id}`);
-        } else {
-            Swal.fire({
-                position: "top-end",
-                icon: "info",
-                title: "<strong>Please Login to continue</strong>",
-                showConfirmButton: false,
-                timer: 2000,
-            });
-            setTimeout(function () {
-                history.push("/login");
-            }, 2500);
-        }
-    };
 
     return (
         <div className="results-container">
@@ -69,7 +51,7 @@ const SiteResults = ({ loggedIn }) => {
                                 </div>
                             </div>
                             <div className="check-result-btn">
-                                <button onClick={() => checkSiteDetails(site._id)}>
+                                <button onClick={() => history.push(`/site-details/${site._id}`)}>
                                     Check it Now
                                 </button>
                             </div>
