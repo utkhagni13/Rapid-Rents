@@ -1,16 +1,162 @@
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600&display=swap");
+
 .site-container {
     text-align: center;
     display: flex;
     gap: 10px;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
+    font-family: "EB Garamond", serif;
 }
 
-.main-details {
+.image-details {
     flex: 1;
+    height: 92vh;
+    top: var(--navbarHeight);
+    position: sticky;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    .site-image {
+        width: 100%;
+        height: 60vh;
+    }
+}
+
+.btn-details {
+    margin-top: var(--smallGap);
+    display: flex;
+    justify-content: center;
+    gap: var(--smallGap);
+    padding: var(--smallestGap);
+    button {
+        padding: var(--smallGap) var(--smallestGap);
+        width: 180px;
+        cursor: pointer;
+        border: none;
+        font-weight: 600;
+        font-size: var(--smallFontSize);
+        border-radius: 30px;
+    }
+    .btn-details-book {
+        background-color: var(--buttonColor2);
+        color: var(--bodyColor);
+    }
+    .btn-details-book:hover {
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+            rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    }
+    .btn-details-wishlist {
+        background-color: var(--bodyColor);
+        color: var(--textColor);
+        border: 3px solid var(--buttonColor);
+    }
+    .btn-details-wishlist:hover {
+        background-color: var(--buttonColor);
+        color: var(--bodyColor);
+    }
+}
+
+.rent-details {
+    font-weight: bold;
+    font-size: var(--bigFontSize);
+    color: var(--buttonColor);
+    span {
+        font-size: var(--fontSize);
+        font-weight: 400;
+    }
 }
 
 .site-details {
     flex: 1;
+    h3 {
+        font-weight: 500;
+        text-align: left;
+        font-size: var(--bigFontSize);
+        border-bottom: 2px solid var(--textColor);
+        margin: var(--smallGap);
+        padding: 0;
+        font-family: var(--bodyFont);
+    }
+    div {
+        margin-bottom: var(--normalGap);
+    }
+    .details-list {
+        text-align: left;
+        padding: 0 var(--smallGap);
+    }
+    .site-details-name {
+        font-weight: bold;
+        font-size: var(--bigFontSize);
+        color: var(--buttonColor2);
+    }
+    .site-details-info {
+        font-size: var(--fontSize);
+        p {
+            margin: 0;
+        }
+    }
+    .site-features {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        p {
+            margin: 0;
+        }
+    }
+}
+
+.site-heading {
+    display: flex;
+    justify-content: left;
+    border-bottom: 1px solid var(--textColor);
+    .site-heading-name {
+        font-weight: 500;
+        font-family: var(--bodyFont);
+        font-size: var(--fontSize);
+        margin-bottom: 0 !important;
+    }
+    .site-heading-icon {
+        display: block;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-bottom: 0 !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .site-container {
+        flex-direction: column;
+    }
+    .image-details {
+        height: 50%;
+        top: auto;
+        position: static;
+        .site-image {
+            width: 100%;
+            height: 40vh;
+        }
+    }
+    .btn-details {
+        margin-top: 0;
+        button {
+            width: 120px;
+            padding: var(--smallestGap);
+            font-size: var(--smallestFontSize);
+        }
+    }
+    .rent-details {
+        p {
+            // margin: 0;
+            font-size: var(--fontSize);
+        }
+    }
+    .site-details {
+        h3 {
+            font-size: var(--fontSize);
+        }
+        .site-details-info {
+            font-size: var(--fontSize);
+        }
+        .site-features {
+            grid-template-columns: 1fr;
+        }
+    }
 }
