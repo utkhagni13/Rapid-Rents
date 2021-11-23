@@ -9,7 +9,7 @@ import { MdDescription, MdOutlineKitchen } from "react-icons/md";
 import { RiRuler2Line } from "react-icons/ri";
 import { GrUserManager } from "react-icons/gr";
 
-import { getPaymentOrder } from "../../../requests/Booking";
+import { getPaymentOrder, addBooking } from "../../../requests/Booking";
 
 const getImageArray = (imgArray) => {
     const images = [];
@@ -27,6 +27,34 @@ const SiteDetails = () => {
     const allSitesData = useSelector((state) => state.AllSites);
     const userData = useSelector((state) => state.Userinfo);
     const siteData = allSitesData.find((site) => site._id === siteid);
+
+    const handleBooking = async (transactionId, paymentId) => {
+        console.log("handleBooking: ", transactionId, paymentId);
+        const paymentDetails = { transactionId: transactionId, paymentId: paymentId };
+        const date = new Date();
+        console.log("date: ", date);
+        const bookingDetails = {
+            siteID: siteid,
+            bookingDate: date,
+            amount: 500,
+            paymentDetails: paymentDetails,
+        };
+        const res = await addBooking(bookingDetails);
+        if (res.data && res.error === null) {
+            Swal.fire({
+                title: "Booking Successful",
+                icon: "success",
+                confirmButtonText: "Ok",
+            });
+        } else {
+            Swal.fire({
+                title: "Booking Failed",
+                text: "Please contact the customer service",
+                icon: "error",
+                confirmButtonText: "Ok",
+            });
+        }
+    };
 
     // razorpay promise
     function loadScript(src) {
@@ -67,15 +95,13 @@ const SiteDetails = () => {
             key: "rzp_test_afIzm8MsEeKmfQ",
             currency: res.data.currency,
             amount: res.data.amount,
-            order_id: res.data.id,
+            transaction_id: res.data.id,
             name: "Rapid-Rents",
             description: "Please verify your phone number and email",
             handler: async function (response) {
                 console.log(response);
-                // const paymentDetails = await getPaymentDetails(response.razorpay_payment_id);
-                // console.log("payment: ", paymentDetails.data);
                 if (response.razorpay_payment_id) {
-                    //   await addOrder(paymentDetails.data);
+                    await handleBooking(res.data.id, response.razorpay_payment_id);
                 } else {
                     Swal.fire({
                         icon: "error",
