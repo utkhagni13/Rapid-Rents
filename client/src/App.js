@@ -17,6 +17,7 @@ import { fetchAllCities } from "./requests/Cities";
 import { getUserData } from "./requests/Authentication";
 import { updateCity } from "./storage/actions/Cities";
 import { updateSites } from "./storage/actions/Sites";
+import { Userinfo } from "./storage/actions/User";
 
 /******** Styles ********/
 import "./styles/Common.scss";
@@ -34,10 +35,11 @@ const App = () => {
             console.log("getuserdata_res:", res);
             if (res.data) {
                 setLoggedIn(true);
+                dispatch(Userinfo(res.data));
             }
         };
         getuserdata();
-    }, [setLoggedIn]);
+    }, [dispatch]);
 
     useEffect(() => {
         //fetch all cities from server

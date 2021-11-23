@@ -1,8 +1,10 @@
 // Dependencies
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
+const Razorpay = require("razorpay");
 
 // Files
+const keys = require("../config/Keys");
 const jwt = require("../utils/jwt-functions");
 const userSchema = require("../models/Users");
 const UserValidators = require("../validators/UserValidators");
@@ -122,5 +124,29 @@ exports.getUserData = async (req, res) => {
         return res.status(200).json({ data: result, error: null });
     } catch (error) {
         return res.status(400).json({ data: null, error: error.message });
+    }
+};
+
+exports.paymentOrder = async (req, res) => {
+    //razorpay
+    const options = {
+        amount: req.body.totalAmt * 100,
+        currency: "INR",
+        payment_capture: 1,
+    };
+    try {
+        const razorInstance = new Razorpay({
+            key_id: keys.razorpay_key_id,
+            key_secret: keys.razorpay_key_secret,
+        });
+        const response = await razorInstance.orders.create(options);
+        const data = {
+            id: response.id,
+            currency: response.currency,
+            amount: response.amount,
+        };
+        res.status(200).json({ data: data, error: null });
+    } catch (error) {
+        res.status(400).json({ data: null, error: error });
     }
 };
