@@ -1,6 +1,6 @@
 import React from "react";
 import Swal from "sweetalert2";
-import { useParams } from "react-router";
+import { useParams, useHistory } from "react-router";
 import { useSelector } from "react-redux";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -9,7 +9,7 @@ import { MdDescription, MdOutlineKitchen } from "react-icons/md";
 import { RiRuler2Line } from "react-icons/ri";
 import { GrUserManager } from "react-icons/gr";
 
-import { getPaymentOrder } from "../../../requests/Booking";
+import { getPaymentOrder, addBooking } from "../../../requests/Booking";
 
 const getImageArray = (imgArray) => {
     const images = [];
@@ -22,11 +22,44 @@ const getImageArray = (imgArray) => {
     return images;
 };
 
-const SiteDetails = () => {
+const SiteDetails = ({ loggedIn }) => {
     const { siteid } = useParams();
+    const history = useHistory();
     const allSitesData = useSelector((state) => state.AllSites);
     const userData = useSelector((state) => state.Userinfo);
     const siteData = allSitesData.find((site) => site._id === siteid);
+
+    const handleBooking = async (transactionId, paymentId) => {
+        console.log("handleBooking: ", transactionId, paymentId);
+        const paymentDetails = { transactionId: transactionId, paymentId: paymentId };
+        const date = new Date();
+        console.log("date: ", date);
+        const bookingDetails = {
+            siteID: siteid,
+            bookingDate: date,
+            amount: 500,
+            paymentDetails: paymentDetails,
+        };
+        const res = await addBooking(bookingDetails);
+        if (res.data && res.error === null) {
+            Swal.fire({
+                title: "Booking Successful",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 2000,
+            });
+            setTimeout(function () {
+                history.push("/bookings");
+            }, 2500);
+        } else {
+            Swal.fire({
+                title: `${res.error}`,
+                text: "Please contact the customer service",
+                icon: "error",
+                confirmButtonText: "Ok",
+            });
+        }
+    };
 
     // razorpay promise
     function loadScript(src) {
@@ -43,7 +76,7 @@ const SiteDetails = () => {
         });
     }
 
-    const proceedPayment = async (totalCost) => {
+    const proceedPayment = async () => {
         const load = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
         if (!load) {
             Swal.fire({
@@ -53,7 +86,7 @@ const SiteDetails = () => {
             });
             return;
         }
-        const res = await getPaymentOrder(totalCost);
+        const res = await getPaymentOrder(500);
         if (res.data === null || res.error !== null) {
             Swal.fire({
                 icon: "error",
@@ -67,20 +100,18 @@ const SiteDetails = () => {
             key: "rzp_test_afIzm8MsEeKmfQ",
             currency: res.data.currency,
             amount: res.data.amount,
-            order_id: res.data.id,
+            transaction_id: res.data.id,
             name: "Rapid-Rents",
             description: "Please verify your phone number and email",
             handler: async function (response) {
                 console.log(response);
-                // const paymentDetails = await getPaymentDetails(response.razorpay_payment_id);
-                // console.log("payment: ", paymentDetails.data);
                 if (response.razorpay_payment_id) {
-                    //   await addOrder(paymentDetails.data);
+                    await handleBooking(res.data.id, response.razorpay_payment_id);
                 } else {
                     Swal.fire({
                         icon: "error",
                         title: "Some error occured",
-                        text: "Please contact BSM customer service",
+                        text: "Please contact the customer service",
                     });
                 }
             },
@@ -94,6 +125,22 @@ const SiteDetails = () => {
     };
 
     const bookSite = async () => {
+        if (!loggedIn) {
+            Swal.fire({
+                title: "User not logged in",
+                text: "Please login to continue",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "var(--buttonColor2)",
+                cancelButtonColor: "var(--buttonColor3)",
+                confirmButtonText: "Login",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    history.push("/login");
+                }
+            });
+            return;
+        }
         Swal.fire({
             title: "<strong>Select the date of joining</strong>",
             icon: "info",
@@ -118,7 +165,7 @@ const SiteDetails = () => {
                     confirmButtonText: "Proceed to Payment",
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        proceedPayment(siteData.rent);
+                        proceedPayment();
                     }
                 });
             }
