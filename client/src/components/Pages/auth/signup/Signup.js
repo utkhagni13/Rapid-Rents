@@ -277,11 +277,11 @@ const SignUp = ({ loggedIn }) => {
                                     </div>
                                 </div>
                                 <button
-                                    style={{ width: "30%" }}
+                                    style={{ width: "50%" }}
                                     type="submit"
                                     className="submit-form yellow"
                                 >
-                                    SUBMIT
+                                    REGISTER
                                 </button>
                                 <br />
                                 <br />
