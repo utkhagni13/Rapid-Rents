@@ -25,6 +25,7 @@ const getImageArray = (imgArray) => {
 const SiteDetails = () => {
     const { siteid } = useParams();
     const allSitesData = useSelector((state) => state.AllSites);
+    const userData = useSelector((state) => state.Userinfo);
     const siteData = allSitesData.find((site) => site._id === siteid);
 
     // razorpay promise
@@ -84,8 +85,8 @@ const SiteDetails = () => {
                 }
             },
             prefill: {
-                // email: user.email,
-                // contact: user.mobile,
+                email: userData.email,
+                contact: userData.mobile,
             },
         };
         const paymentObject = new window.Razorpay(options);
