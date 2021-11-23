@@ -1,13 +1,16 @@
 const mongoose = require("mongoose");
+var Schema = mongoose.Schema;
 
 const bookingSchema = new mongoose.Schema(
     {
         id: mongoose.Schema.Types.ObjectId,
         userID: {
-            type: Schema.Types.ObjectId, ref: "Users",
+            type: Schema.Types.ObjectId,
+            ref: "Users",
         },
         siteID: {
-            type: Schema.Types.ObjectId, ref: "RentalSites",
+            type: Schema.Types.ObjectId,
+            ref: "RentalSites",
         },
         amount: {
             type: Number,
@@ -27,7 +30,7 @@ const bookingSchema = new mongoose.Schema(
         },
     },
     {
-        timestamps: {createdAt: "createdAt", updatedAt: "updatedAt"},
+        timestamps: { createdAt: "createdAt", updatedAt: "updatedAt" },
     }
 );
 

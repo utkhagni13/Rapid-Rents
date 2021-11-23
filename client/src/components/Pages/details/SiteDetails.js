@@ -1,6 +1,6 @@
 import React from "react";
 import Swal from "sweetalert2";
-import { useParams } from "react-router";
+import { useParams, useHistory } from "react-router";
 import { useSelector } from "react-redux";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -22,8 +22,9 @@ const getImageArray = (imgArray) => {
     return images;
 };
 
-const SiteDetails = () => {
+const SiteDetails = ({ loggedIn }) => {
     const { siteid } = useParams();
+    const history = useHistory();
     const allSitesData = useSelector((state) => state.AllSites);
     const userData = useSelector((state) => state.Userinfo);
     const siteData = allSitesData.find((site) => site._id === siteid);
@@ -44,11 +45,15 @@ const SiteDetails = () => {
             Swal.fire({
                 title: "Booking Successful",
                 icon: "success",
-                confirmButtonText: "Ok",
+                showConfirmButton: false,
+                timer: 2000,
             });
+            setTimeout(function () {
+                history.push("/bookings");
+            }, 2500);
         } else {
             Swal.fire({
-                title: "Booking Failed",
+                title: `${res.error}`,
                 text: "Please contact the customer service",
                 icon: "error",
                 confirmButtonText: "Ok",
@@ -71,7 +76,7 @@ const SiteDetails = () => {
         });
     }
 
-    const proceedPayment = async (totalCost) => {
+    const proceedPayment = async () => {
         const load = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
         if (!load) {
             Swal.fire({
@@ -81,7 +86,7 @@ const SiteDetails = () => {
             });
             return;
         }
-        const res = await getPaymentOrder(totalCost);
+        const res = await getPaymentOrder(500);
         if (res.data === null || res.error !== null) {
             Swal.fire({
                 icon: "error",
@@ -106,7 +111,7 @@ const SiteDetails = () => {
                     Swal.fire({
                         icon: "error",
                         title: "Some error occured",
-                        text: "Please contact BSM customer service",
+                        text: "Please contact the customer service",
                     });
                 }
             },
@@ -120,6 +125,22 @@ const SiteDetails = () => {
     };
 
     const bookSite = async () => {
+        if (!loggedIn) {
+            Swal.fire({
+                title: "User not logged in",
+                text: "Please login to continue",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "var(--buttonColor2)",
+                cancelButtonColor: "var(--buttonColor3)",
+                confirmButtonText: "Login",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    history.push("/login");
+                }
+            });
+            return;
+        }
         Swal.fire({
             title: "<strong>Select the date of joining</strong>",
             icon: "info",
@@ -144,7 +165,7 @@ const SiteDetails = () => {
                     confirmButtonText: "Proceed to Payment",
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        proceedPayment(siteData.rent);
+                        proceedPayment();
                     }
                 });
             }
