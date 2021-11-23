@@ -1,3 +1,6 @@
+// @import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=EB+Garamond:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Bowlby+One+SC&family=EB+Garamond:wght@600&display=swap");
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -23,25 +26,15 @@
 }
 
 .common_btn {
-    display: block;
-    margin-top: auto;
-    margin-bottom: auto;
-    button {
-        padding: 5px 15px;
-        background-color: var(--themeColor);
-        border: 1px solid var(--buttonColor);
-        border-width: 2px;
-        border-radius: 30px;
+    p {
+        font-family: "Bowlby One SC", cursive;
+        color: var(--buttonColor2);
+        font-size: 3rem;
+        margin-top: 0;
+    }
+    a {
         color: var(--textColor);
-        font-size: var(--smallFontSize);
-        cursor: pointer;
-        font-weight: bold;
-        transition: all 0.2s ease-in-out;
-        &:hover {
-            background-color: var(--buttonColor);
-            color: var(--themeColor);
-            border-color: var(--themeColor);
-        }
+        text-decoration: none;
     }
 }
 
@@ -100,5 +93,17 @@
     &:hover {
         cursor: pointer;
         border-bottom: 2px solid var(--buttonColor);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .common_btn {
+        display: block;
+        margin-top: auto;
+        margin-bottom: auto;
+        p {
+            font-size: 2rem;
+            margin-top: 5px;
+        }
     }
 }

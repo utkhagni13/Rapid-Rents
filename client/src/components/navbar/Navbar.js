@@ -183,7 +183,7 @@ const Navbar = ({ loggedIn, setLoggedIn }) => {
         <div className="navbar">
             <div className="common_btn">
                 <a href="/" rel="noreferrer">
-                    <button>Rapid-Rents</button>
+                    <p>Rapid-Rents</p>
                 </a>
             </div>
             {mobileView ? DisplayMobile() : DisplayDesktop()}

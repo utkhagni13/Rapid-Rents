@@ -14,7 +14,7 @@ const Logout = ({ setLoggedIn }) => {
         } else {
             Swal.fire({
                 title: `<strong>Some error occured</strong>`,
-                text: "Please check your internet and try again",
+                text: `${res.error}`,
                 icon: "error",
                 position: "top-end",
             });
