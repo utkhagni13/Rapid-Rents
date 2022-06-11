@@ -72,7 +72,7 @@ const usernavlist = [
         path: "/",
     },
     {
-        name: "My Account",
+        name: "Profile",
         icon: <RiAccountCircleFill />,
         path: "/user-profile",
     },

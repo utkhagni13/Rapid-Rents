@@ -26,6 +26,9 @@
 }
 
 .common_btn {
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
     p {
         font-family: "Bowlby One SC", cursive;
         color: var(--buttonColor2);
@@ -35,6 +38,23 @@
     a {
         color: var(--textColor);
         text-decoration: none;
+    }
+    button {
+        padding: 5px 15px;
+        background-color: var(--themeColor);
+        border: 1px solid var(--buttonColor);
+        border-width: 2px;
+        border-radius: 30px;
+        color: var(--textColor);
+        font-size: var(--smallFontSize);
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.2s ease-in-out;
+        &:hover {
+            background-color: var(--buttonColor);
+            color: var(--themeColor);
+            border-color: var(--themeColor);
+        }
     }
 }
 

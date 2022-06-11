@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const Razorpay = require("razorpay");
 
 // Files
-const keys = require("../config/Keys");
 const jwt = require("../utils/jwt-functions");
 const userSchema = require("../models/Users");
 const UserValidators = require("../validators/UserValidators");
@@ -136,8 +135,8 @@ exports.paymentOrder = async (req, res) => {
     };
     try {
         const razorInstance = new Razorpay({
-            key_id: keys.razorpay_key_id,
-            key_secret: keys.razorpay_key_secret,
+            key_id: process.env.RAZORPAY_KEY_ID,
+            key_secret: process.env.RAZORPAY_KEY_SECERET,
         });
         const response = await razorInstance.orders.create(options);
         const data = {

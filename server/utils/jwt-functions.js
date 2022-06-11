@@ -6,7 +6,7 @@ module.exports.createToken = (params) => {
     try {
         const token = jwt.sign(
             { userid: params._id, email: params.email, role: params.role },
-            jwtkey.jwtSecret,
+            process.env.JWT_SECRET,
             jwtconfig
         );
         return { data: token, error: null };
@@ -17,7 +17,7 @@ module.exports.createToken = (params) => {
 
 module.exports.verifyToken = (token) => {
     try {
-        const decoded = jwt.verify(token, jwtkey.jwtSecret);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
         return { data: decoded, error: null };
     } catch (err) {
         return { data: null, error: err };
